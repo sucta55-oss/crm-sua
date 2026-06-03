@@ -18,12 +18,41 @@ const Pipeline: React.FC<PipelineProps> = ({ user: _user }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [draggedLead, setDraggedLead] = useState<Lead | null>(null);
+  const [activeQuickMoveLeadId, setActiveQuickMoveLeadId] = useState<string | null>(null);
   
   // Failure Modal state
   const [showFailureModal, setShowFailureModal] = useState(false);
   const [modalLead, setModalLead] = useState<Lead | null>(null);
   const [lostReason, setLostReason] = useState('');
   const [savingModal, setSavingModal] = useState(false);
+
+  useEffect(() => {
+    const handleOutsideClick = () => {
+      setActiveQuickMoveLeadId(null);
+    };
+    window.addEventListener('click', handleOutsideClick);
+    return () => window.removeEventListener('click', handleOutsideClick);
+  }, []);
+
+  const handleMoveLeadQuick = async (lead: Lead, targetStage: PipelineStage) => {
+    setActiveQuickMoveLeadId(null);
+    if (lead.stage === targetStage) return;
+
+    if (targetStage === 'Thất bại') {
+      setModalLead(lead);
+      setLostReason('');
+      setShowFailureModal(true);
+      return;
+    }
+
+    try {
+      setLeads(prev => prev.map(l => l.id === lead.id ? { ...l, stage: targetStage } : l));
+      await dbService.saveLead({ id: lead.id, stage: targetStage });
+    } catch (err) {
+      console.error('Error updating stage quick:', err);
+      loadLeads();
+    }
+  };
 
 
   const loadLeads = async () => {
@@ -189,8 +218,52 @@ const Pipeline: React.FC<PipelineProps> = ({ user: _user }) => {
                     key={lead.id}
                     draggable
                     onDragStart={() => handleDragStart(lead)}
-                    className="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 cursor-grab active:cursor-grabbing hover:shadow-md transition-all relative group"
+                    className="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 cursor-grab active:cursor-grabbing hover:shadow-md transition-all relative pr-8 group"
                   >
+                    {/* Quick Move Trigger (Visible on mobile/hover) */}
+                    <div className="absolute top-2 right-2 flex items-center">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveQuickMoveLeadId(activeQuickMoveLeadId === lead.id ? null : lead.id);
+                        }}
+                        className="w-7 h-7 rounded-full bg-surface-container-low hover:bg-surface-container-high flex items-center justify-center border border-outline-variant/30 text-on-surface-variant transition-all cursor-pointer"
+                        title="Di chuyển nhanh"
+                      >
+                        <span className="material-symbols-outlined text-[16px]">swap_horiz</span>
+                      </button>
+
+                      {/* Dropdown Menu for Quick Move */}
+                      {activeQuickMoveLeadId === lead.id && (
+                        <div className="absolute right-0 top-8 bg-white border border-outline-variant rounded-lg shadow-lg py-1.5 z-20 w-44">
+                          <p className="text-[10px] text-on-surface-variant font-bold px-3 py-1 uppercase tracking-wider border-b border-outline-variant/30 mb-1">
+                            Chuyển trạng thái
+                          </p>
+                          {COLUMNS.map(colItem => (
+                            <button
+                              key={colItem.id}
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleMoveLeadQuick(lead, colItem.id);
+                              }}
+                              className={`w-full text-left px-3 py-1.5 text-[12px] font-body-md hover:bg-surface-container transition-colors flex items-center space-x-2 ${
+                                lead.stage === colItem.id ? 'text-primary-container font-bold bg-primary/5' : 'text-on-surface'
+                              }`}
+                            >
+                              <span className={`w-1.5 h-1.5 rounded-full ${
+                                colItem.id === 'Thành công' ? 'bg-[#1E5E3A]' :
+                                colItem.id === 'Thất bại' ? 'bg-error' :
+                                colItem.id === 'Đàm phán' ? 'bg-amber-500' : 'bg-outline-variant'
+                              }`} />
+                              <span>{colItem.title}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
                     <h4 className="font-body-md text-body-md font-semibold text-on-surface mb-1">
                       {lead.name}
                     </h4>

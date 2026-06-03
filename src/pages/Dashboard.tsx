@@ -163,38 +163,38 @@ const Dashboard: React.FC<DashboardProps> = ({ user: _user, onNavigate }) => {
             </p>
           </div>
           
-          <div className="h-56 mt-4 flex items-end justify-around space-x-8 px-6 border-b border-outline-variant/30 pb-4">
+          <div className="h-56 mt-4 flex items-end justify-around space-x-4 md:space-x-8 px-2 md:px-6 border-b border-outline-variant/30 pb-4">
             {/* Sữa tươi */}
-            <div className="flex flex-col items-center w-20 group">
+            <div className="flex flex-col items-center w-14 sm:w-20 group">
               <div 
                 style={{ height: `${freshPercent}%` }}
                 className="w-full bg-primary-container/20 border-x-2 border-primary-container rounded-t-lg transition-all duration-500 hover:bg-primary-container/30 relative flex items-end justify-center group-hover:scale-105"
               >
                 <span className="absolute -top-7 text-body-md font-bold text-primary-container">{milkStats.fresh}</span>
               </div>
-              <span className="font-label-md text-label-md text-on-surface mt-2">Sữa tươi</span>
+              <span className="font-label-md text-[11px] sm:text-label-md text-on-surface mt-2 whitespace-nowrap">Sữa tươi</span>
             </div>
 
             {/* Sữa chua */}
-            <div className="flex flex-col items-center w-20 group">
+            <div className="flex flex-col items-center w-14 sm:w-20 group">
               <div 
                 style={{ height: `${yogurtPercent}%` }}
                 className="w-full bg-primary/20 border-x-2 border-primary rounded-t-lg transition-all duration-500 hover:bg-primary/30 relative flex items-end justify-center group-hover:scale-105"
               >
                 <span className="absolute -top-7 text-body-md font-bold text-primary">{milkStats.yogurt}</span>
               </div>
-              <span className="font-label-md text-label-md text-on-surface mt-2">Sữa chua</span>
+              <span className="font-label-md text-[11px] sm:text-label-md text-on-surface mt-2 whitespace-nowrap">Sữa chua</span>
             </div>
 
             {/* Sữa bột */}
-            <div className="flex flex-col items-center w-20 group">
+            <div className="flex flex-col items-center w-14 sm:w-20 group">
               <div 
                 style={{ height: `${powderPercent}%` }}
                 className="w-full bg-secondary/20 border-x-2 border-secondary rounded-t-lg transition-all duration-500 hover:bg-secondary/30 relative flex items-end justify-center group-hover:scale-105"
               >
                 <span className="absolute -top-7 text-body-md font-bold text-secondary">{milkStats.powder}</span>
               </div>
-              <span className="font-label-md text-label-md text-on-surface mt-2">Sữa bột</span>
+              <span className="font-label-md text-[11px] sm:text-label-md text-on-surface mt-2 whitespace-nowrap">Sữa bột</span>
             </div>
           </div>
           <div className="flex justify-between items-center mt-4">

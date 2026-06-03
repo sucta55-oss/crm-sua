@@ -285,19 +285,19 @@ const Customers: React.FC<CustomersProps> = ({ user }) => {
     <div className="h-full flex flex-col p-container-padding pb-8 overflow-hidden">
       
       {/* Header section */}
-      <div className="flex-shrink-0 flex justify-between items-center mb-6">
+      <div className="flex-shrink-0 flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-6">
         <div>
           <h2 className="font-headline-md text-headline-md text-on-surface">Danh sách khách hàng</h2>
           <p className="text-body-md text-on-surface-variant">
             Nơi lưu trữ, quản trị thông tin đại lý, trường học, chuỗi siêu thị đối tác sữa Vĩnh Hưng.
           </p>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2 w-full xl:w-auto">
           {/* Export button - Admin/Manager only */}
           {user.role !== 'Sales' && (
             <button
               onClick={handleCsvExport}
-              className="flex items-center space-x-2 border border-outline-variant bg-white text-on-surface px-5 py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all cursor-pointer active:scale-95 duration-100"
+              className="flex items-center justify-center space-x-2 border border-outline-variant bg-white text-on-surface px-4 py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all cursor-pointer active:scale-95 duration-100 flex-1 sm:flex-initial"
             >
               <span className="material-symbols-outlined text-[18px]">download</span>
               <span>Xuất CSV</span>
@@ -305,7 +305,7 @@ const Customers: React.FC<CustomersProps> = ({ user }) => {
           )}
 
           {/* Import file button */}
-          <label className="flex items-center space-x-2 border border-outline-variant bg-white text-on-surface px-5 py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all cursor-pointer active:scale-95 duration-100">
+          <label className="flex items-center justify-center space-x-2 border border-outline-variant bg-white text-on-surface px-4 py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all cursor-pointer active:scale-95 duration-100 flex-1 sm:flex-initial">
             <span className="material-symbols-outlined text-[18px]">upload</span>
             <span>Nhập CSV</span>
             <input
@@ -319,7 +319,7 @@ const Customers: React.FC<CustomersProps> = ({ user }) => {
           {/* Add customer button */}
           <button
             onClick={handleOpenAddForm}
-            className="flex items-center space-x-2 bg-primary-container text-white px-5 py-2.5 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all shadow-sm cursor-pointer"
+            className="flex items-center justify-center space-x-2 bg-primary-container text-white px-4 py-2.5 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all shadow-sm cursor-pointer flex-1 sm:flex-initial"
           >
             <span className="material-symbols-outlined text-[18px]">add</span>
             <span>Thêm khách hàng</span>
@@ -489,7 +489,7 @@ const Customers: React.FC<CustomersProps> = ({ user }) => {
               </div>
 
               {/* Contact Name & Phone */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block" htmlFor="lead-contact">
                     Người liên hệ đại diện
@@ -533,7 +533,7 @@ const Customers: React.FC<CustomersProps> = ({ user }) => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Segment Selection - Mandatory */}
                 <div className="space-y-1">
                   <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block">
@@ -575,7 +575,7 @@ const Customers: React.FC<CustomersProps> = ({ user }) => {
                 <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block">
                   Ngành sữa quan tâm (Có thể chọn nhiều)
                 </label>
-                <div className="flex space-x-6 py-2">
+                <div className="flex flex-wrap gap-x-6 gap-y-2 py-2">
                   {(['Sữa tươi', 'Sữa chua', 'Sữa bột'] as MilkType[]).map(milk => {
                     const isChecked = milkInterests.includes(milk);
                     return (
@@ -594,7 +594,7 @@ const Customers: React.FC<CustomersProps> = ({ user }) => {
               </div>
 
               {/* Pipeline details if adding details */}
-              <div className="grid grid-cols-2 gap-4 border-t border-outline-variant/20 pt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-outline-variant/20 pt-4">
                 <div className="space-y-1">
                   <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block" htmlFor="lead-rev">
                     Doanh thu dự kiến (VND)

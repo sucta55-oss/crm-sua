@@ -91,10 +91,10 @@ const Settings: React.FC<SettingsProps> = ({ user }) => {
   };
 
   return (
-    <div className="h-full flex p-container-padding gap-stack-lg overflow-hidden">
+    <div className="h-full flex flex-col lg:flex-row p-container-padding gap-stack-lg overflow-y-auto lg:overflow-hidden">
       
       {/* Sidebar - Left side 30% */}
-      <div className="w-[30%] bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 flex flex-col space-y-2">
+      <div className="w-full lg:w-[30%] bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 flex flex-col space-y-2 flex-shrink-0">
         <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-2 px-2">Cài đặt hệ thống</h3>
         
         <button
@@ -125,7 +125,7 @@ const Settings: React.FC<SettingsProps> = ({ user }) => {
       </div>
 
       {/* Main Content - Right side 70% */}
-      <div className="w-[70%] bg-surface-container-lowest border border-outline-variant/30 p-stack-lg rounded-xl flex flex-col overflow-y-auto custom-scrollbar">
+      <div className="w-full lg:w-[70%] bg-surface-container-lowest border border-outline-variant/30 p-stack-lg rounded-xl flex flex-col overflow-y-auto custom-scrollbar">
         
         {activeSettingSection === 'profile' && (
           <div className="space-y-6">
@@ -135,7 +135,7 @@ const Settings: React.FC<SettingsProps> = ({ user }) => {
             </div>
             
             <div className="border-t border-outline-variant/30 pt-4 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block mb-1">
                     Địa chỉ Email

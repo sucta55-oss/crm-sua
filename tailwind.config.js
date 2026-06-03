@@ -66,7 +66,7 @@ export default {
       spacing: {
         "unit": "8px",
         "stack-sm": "8px",
-        "container-padding": "32px",
+        "container-padding": "var(--container-padding)",
         "gutter": "16px",
         "stack-md": "16px",
         "stack-lg": "24px"

@@ -190,13 +190,13 @@ const Tasks: React.FC<TasksProps> = ({ user }) => {
             return (
               <div
                 key={task.id}
-                className="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant/30 rounded-xl hover:bg-surface-container-low/40 transition-all"
+                className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant/30 rounded-xl hover:bg-surface-container-low/40 transition-all gap-3"
               >
-                <div className="flex items-center space-x-4 flex-1">
+                <div className="flex items-start sm:items-center space-x-4 flex-1">
                   {/* Round toggle checkbox */}
                   <button
                     onClick={() => handleToggleComplete(task)}
-                    className="flex-shrink-0 w-6 h-6 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary-container active:scale-90 transition-all"
+                    className="flex-shrink-0 w-6 h-6 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary-container active:scale-90 transition-all mt-0.5 sm:mt-0"
                   >
                     {isCompleted && (
                       <span className="material-symbols-outlined text-primary-container text-[18px] font-bold">check</span>
@@ -222,7 +222,7 @@ const Tasks: React.FC<TasksProps> = ({ user }) => {
                 </div>
 
                 {/* Right Side: Priority & Deadline */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-between sm:justify-end space-x-4 w-full sm:w-auto border-t sm:border-t-0 border-outline-variant/10 pt-2 sm:pt-0">
                   <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
                     task.priority === 'High' ? 'bg-error-container text-on-error-container' :
                     task.priority === 'Medium' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'

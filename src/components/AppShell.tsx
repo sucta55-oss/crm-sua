@@ -19,6 +19,7 @@ export type TabType = 'dashboard' | 'pipeline' | 'tasks' | 'customers' | 'paymen
 const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
   const [activeTab, setActiveTab] = useState<TabType>('dashboard');
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const handleSignOut = async () => {
     await dbService.signOut();
@@ -49,10 +50,31 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
 
   return (
     <div className="bg-surface-container-lowest overflow-hidden flex h-screen w-screen text-on-surface">
+      {/* Mobile Drawer Backdrop overlay */}
+      {isMobileSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar Navigation */}
-      <aside className="w-[260px] sidebar-glass border-r border-outline-variant flex-shrink-0 flex flex-col z-20">
+      <aside 
+        className={`fixed inset-y-0 left-0 w-[260px] sidebar-glass border-r border-outline-variant flex-shrink-0 flex flex-col z-50 sidebar-transition lg:relative lg:translate-x-0 ${
+          isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+      >
         {/* Sidebar Header / Logo */}
-        <div className="px-8 py-10 flex flex-col items-center">
+        <div className="px-8 py-10 flex flex-col items-center relative">
+          {/* Close button for Mobile drawer */}
+          <button
+            onClick={() => setIsMobileSidebarOpen(false)}
+            className="lg:hidden absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container transition-all"
+            title="Đóng menu"
+          >
+            <span className="material-symbols-outlined text-on-surface text-[20px]">close</span>
+          </button>
+
           <img
             alt="Vĩnh Hưng Milk Logo"
             className="h-24 w-auto object-contain mb-2"
@@ -69,7 +91,10 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
         {/* Navigation Menu */}
         <nav className="flex-1 px-0 py-4 space-y-1 custom-scrollbar overflow-y-auto">
           <button
-            onClick={() => setActiveTab('dashboard')}
+            onClick={() => {
+              setActiveTab('dashboard');
+              setIsMobileSidebarOpen(false);
+            }}
             className={`w-full flex items-center px-8 py-3.5 group transition-all duration-200 ${
               activeTab === 'dashboard' ? 'nav-item-active' : 'text-[#7C7C75] hover:bg-surface-container-low hover:text-on-background border-l-3 border-transparent'
             }`}
@@ -84,7 +109,10 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
           </button>
 
           <button
-            onClick={() => setActiveTab('pipeline')}
+            onClick={() => {
+              setActiveTab('pipeline');
+              setIsMobileSidebarOpen(false);
+            }}
             className={`w-full flex items-center px-8 py-3.5 group transition-all duration-200 ${
               activeTab === 'pipeline' ? 'nav-item-active' : 'text-[#7C7C75] hover:bg-surface-container-low hover:text-on-background border-l-3 border-transparent'
             }`}
@@ -99,7 +127,10 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
           </button>
 
           <button
-            onClick={() => setActiveTab('tasks')}
+            onClick={() => {
+              setActiveTab('tasks');
+              setIsMobileSidebarOpen(false);
+            }}
             className={`w-full flex items-center px-8 py-3.5 group transition-all duration-200 ${
               activeTab === 'tasks' ? 'nav-item-active' : 'text-[#7C7C75] hover:bg-surface-container-low hover:text-on-background border-l-3 border-transparent'
             }`}
@@ -114,7 +145,10 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
           </button>
 
           <button
-            onClick={() => setActiveTab('customers')}
+            onClick={() => {
+              setActiveTab('customers');
+              setIsMobileSidebarOpen(false);
+            }}
             className={`w-full flex items-center px-8 py-3.5 group transition-all duration-200 ${
               activeTab === 'customers' ? 'nav-item-active' : 'text-[#7C7C75] hover:bg-surface-container-low hover:text-on-background border-l-3 border-transparent'
             }`}
@@ -129,7 +163,10 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
           </button>
 
           <button
-            onClick={() => setActiveTab('payments')}
+            onClick={() => {
+              setActiveTab('payments');
+              setIsMobileSidebarOpen(false);
+            }}
             className={`w-full flex items-center px-8 py-3.5 group transition-all duration-200 ${
               activeTab === 'payments' ? 'nav-item-active' : 'text-[#7C7C75] hover:bg-surface-container-low hover:text-on-background border-l-3 border-transparent'
             }`}
@@ -148,7 +185,10 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
           </div>
 
           <button
-            onClick={() => setActiveTab('settings')}
+            onClick={() => {
+              setActiveTab('settings');
+              setIsMobileSidebarOpen(false);
+            }}
             className={`w-full flex items-center px-8 py-3.5 group transition-all duration-200 ${
               activeTab === 'settings' ? 'nav-item-active' : 'text-[#7C7C75] hover:bg-surface-container-low hover:text-on-background border-l-3 border-transparent'
             }`}
@@ -190,6 +230,7 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
               <button
                 onClick={() => {
                   setActiveTab('settings');
+                  setIsMobileSidebarOpen(false);
                   setShowUserMenu(false);
                 }}
                 className="w-full text-left font-body-md text-body-md p-2 rounded-lg hover:bg-surface-container transition-colors flex items-center space-x-2 text-on-surface"
@@ -213,13 +254,24 @@ const AppShell: React.FC<AppShellProps> = ({ user, onLogout }) => {
       <main className="flex-1 flex flex-col bg-[#FDFDFB] relative overflow-hidden">
         {/* Top App Bar */}
         <header className="h-20 flex items-center justify-between px-container-padding z-10 border-b border-outline-variant/30 flex-shrink-0">
-          <div className="flex items-center space-x-4">
-            <h2 className="font-headline-md text-headline-md text-on-surface">
-              Chào buổi sáng, {user.full_name.split(' ').pop()}
-            </h2>
-            <span className="px-3 py-1 bg-primary/10 text-primary font-label-md text-[11px] rounded-full uppercase tracking-widest">
-              Hôm nay: {new Date().toLocaleDateString('vi-VN')}
-            </span>
+          <div className="flex items-center space-x-3">
+            {/* Hamburger Button for Mobile */}
+            <button
+              onClick={() => setIsMobileSidebarOpen(true)}
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant hover:bg-surface-container transition-all"
+              title="Mở menu"
+            >
+              <span className="material-symbols-outlined text-on-surface">menu</span>
+            </button>
+
+            <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
+              <h2 className="font-headline-md text-[18px] md:text-headline-md text-on-surface leading-tight">
+                Chào buổi sáng, {user.full_name.split(' ').pop()}
+              </h2>
+              <span className="hidden sm:inline-block px-3 py-1 bg-primary/10 text-primary font-label-md text-[11px] rounded-full uppercase tracking-widest mt-1 md:mt-0 max-w-max">
+                Hôm nay: {new Date().toLocaleDateString('vi-VN')}
+              </span>
+            </div>
           </div>
           <div className="flex items-center space-x-stack-lg">
             <div className="relative">

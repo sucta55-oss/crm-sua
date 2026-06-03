@@ -5,11 +5,31 @@
 @config "../tailwind.config.js";
 
 
+:root {
+  --container-padding: 16px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-padding: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-padding: 32px;
+  }
+}
+
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
     @apply bg-surface text-on-surface antialiased;
   }
+}
+
+.sidebar-transition {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-glass {
