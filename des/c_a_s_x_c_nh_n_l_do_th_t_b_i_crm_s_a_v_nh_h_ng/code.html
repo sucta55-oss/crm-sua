@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Xác nhận lý do thất bại - Sữa Vĩnh Hưng CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9f7",
+                        "on-background": "#1a1c1b",
+                        "secondary-fixed": "#e4e3da",
+                        "on-surface": "#1a1c1b",
+                        "outline-variant": "#c0c9bf",
+                        "primary": "#004625",
+                        "primary-fixed": "#aff2c2",
+                        "secondary": "#5e5f58",
+                        "surface-container": "#eeeeec",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "secondary-container": "#e4e3da",
+                        "on-secondary-fixed-variant": "#474741",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#c6c7c2",
+                        "surface-container-high": "#e8e8e6",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dadad8",
+                        "on-secondary-container": "#64655e",
+                        "on-primary-fixed-variant": "#0d512f",
+                        "surface-container-highest": "#e2e3e1",
+                        "primary-container": "#1e5e3a",
+                        "on-surface-variant": "#404941",
+                        "on-secondary-fixed": "#1b1c17",
+                        "on-primary-fixed": "#00210f",
+                        "background": "#f9f9f7",
+                        "outline": "#707971",
+                        "surface-variant": "#e2e3e1",
+                        "on-tertiary-fixed-variant": "#464744",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#3a3c39",
+                        "secondary-fixed-dim": "#c8c7bf",
+                        "surface": "#f9f9f7",
+                        "inverse-on-surface": "#f1f1ef",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "primary-fixed-dim": "#94d5a7",
+                        "tertiary-fixed": "#e3e3de",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "24px",
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "container-padding": "32px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "300"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "300"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f7;
+        }
+        .glass-overlay {
+            backdrop-filter: blur(12px);
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+        .modal-container {
+            background-color: #FDFDFB;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #EFEFEA;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Mock Kanban Background -->
+<div class="fixed inset-0 z-0 flex p-container-padding gap-gutter overflow-x-auto opacity-40 select-none pointer-events-none">
+<!-- Column 1 -->
+<div class="flex-shrink-0 w-80 flex flex-col gap-stack-md">
+<h3 class="font-headline-sm text-headline-sm px-2">Tiềm năng</h3>
+<div class="h-32 bg-surface-container border border-outline-variant rounded-xl p-4"></div>
+<div class="h-48 bg-surface-container border border-outline-variant rounded-xl p-4"></div>
+</div>
+<!-- Column 2 -->
+<div class="flex-shrink-0 w-80 flex flex-col gap-stack-md">
+<h3 class="font-headline-sm text-headline-sm px-2">Liên hệ</h3>
+<div class="h-40 bg-surface-container border border-outline-variant rounded-xl p-4"></div>
+<div class="h-32 bg-surface-container border border-outline-variant rounded-xl p-4"></div>
+</div>
+<!-- Column 3 -->
+<div class="flex-shrink-0 w-80 flex flex-col gap-stack-md">
+<h3 class="font-headline-sm text-headline-sm px-2">Đề xuất</h3>
+<div class="h-56 bg-surface-container border border-outline-variant rounded-xl p-4"></div>
+</div>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-overlay">
+<!-- Modal Container -->
+<div class="modal-container w-full max-w-xl rounded-[12px] flex flex-col overflow-hidden animate-in fade-in zoom-in duration-300">
+<!-- Modal Header -->
+<div class="px-container-padding pt-container-padding pb-stack-md flex justify-between items-center">
+<h2 class="text-[18px] font-medium text-[#1A1A17]">Xác nhận lý do thất bại</h2>
+<button class="text-on-surface-variant hover:bg-surface-container-high p-1 rounded-full transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Content -->
+<div class="px-container-padding pb-container-padding flex flex-col gap-stack-lg">
+<!-- Quick Tags Section -->
+<div class="flex flex-col gap-stack-sm">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Lý do phổ biến</span>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-[#EFEFEA] text-body-md font-body-md text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary/5 transition-all cursor-pointer">
+                            Chê giá cao
+                        </button>
+<button class="px-4 py-2 rounded-full border border-[#EFEFEA] text-body-md font-body-md text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary/5 transition-all cursor-pointer">
+                            Không thích vị sữa chua nha đam
+                        </button>
+<button class="px-4 py-2 rounded-full border border-[#EFEFEA] text-body-md font-body-md text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary/5 transition-all cursor-pointer">
+                            Chính sách vận chuyển chưa phù hợp
+                        </button>
+</div>
+</div>
+<!-- Textarea Section -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="failure-note">Ghi chú chi tiết</label>
+<div class="relative group">
+<textarea class="w-full h-40 p-stack-md rounded-xl border border-[#EFEFEA] focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all outline-none resize-none font-body-md text-body-md text-on-surface custom-scrollbar" id="failure-note" placeholder="Nhập thêm chi tiết về trường hợp này..."></textarea>
+</div>
+</div>
+<!-- Illustration or Image Placeholder (Optional Context) -->
+<div class="w-full h-24 rounded-xl overflow-hidden relative">
+<img alt="Minimalist textures" class="w-full h-full object-cover opacity-10 grayscale" data-alt="A clean and artistic overhead shot of a minimalist workspace with a single cup of milk and a simple notebook on a pure white marble surface. The lighting is soft and natural, coming from the side to create gentle shadows. The color palette consists of whites, creams, and very light greys, conveying a sense of hygiene, organization, and professional calm consistent with a premium dairy brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdwF4nD2mexlITGXQB7bPPJQg_-F9SSMDAdXQ67LYB4EJPAymYPonjBT8TxLyPBf6N-WvgbAyd4pdwVg1OF5IzdP7ddRN9wDs0c97v6m6KGmS8HFCjOOYqpzUe0GPFfQdhyOn0e5FWF8Olw0Xv0xfqCtFqeRAsq675bntL1uS97H_96GB8Op6QhZfjhfRz0l34WEwuxsDTWCDndRu4ai5McvaOT4QtP3Y-7oxUuslPpNSn7HqqdijvsIsq7bT-KsyPsmXvrq145AJt"/>
+<div class="absolute inset-0 flex items-center px-stack-md gap-stack-sm text-on-surface-variant/60">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+<p class="text-[12px]">Dữ liệu này sẽ được tổng hợp vào báo cáo tỷ lệ chuyển đổi hàng tháng.</p>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-container-padding py-stack-lg bg-surface-container-low flex justify-end items-center gap-stack-md">
+<button class="px-6 py-2.5 rounded-xl border border-[#EFEFEA] bg-white text-[#1A1A17] font-label-md text-label-md hover:bg-surface-container-high transition-all cursor-pointer active:scale-95 duration-150">
+                    Hủy bỏ
+                </button>
+<button class="px-8 py-2.5 rounded-[6px] bg-[#1E5E3A] text-white font-label-md text-label-md hover:opacity-90 transition-all shadow-sm cursor-pointer active:scale-95 duration-150">
+                    Lưu trạng thái
+                </button>
+</div>
+</div>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.innerText.trim() === 'Lưu trạng thái') {
+                btn.addEventListener('click', () => {
+                    btn.innerHTML = '<span class="material-symbols-outlined animate-spin" style="font-size: 18px">progress_activity</span>';
+                    setTimeout(() => {
+                        btn.innerHTML = 'Thành công';
+                        btn.classList.replace('bg-[#1E5E3A]', 'bg-primary');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 800);
+                    }, 1200);
+                });
+            }
+        });
+
+        // Tag selection logic
+        const tags = document.querySelectorAll('.flex-wrap button');
+        const textarea = document.getElementById('failure-note');
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const text = tag.innerText.trim();
+                if (textarea.value.includes(text)) {
+                    textarea.value = textarea.value.replace(text + '. ', '');
+                    tag.classList.remove('bg-primary/10', 'border-primary', 'text-primary');
+                } else {
+                    textarea.value += text + '. ';
+                    tag.classList.add('bg-primary/10', 'border-primary', 'text-primary');
+                }
+            });
+        });
+    </script>
+</body></html>

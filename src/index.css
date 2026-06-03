@@ -1,0 +1,49 @@
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap";
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply bg-surface text-on-surface antialiased;
+  }
+}
+
+.sidebar-glass {
+  background-color: rgba(247, 245, 240, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.glass-overlay {
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e0ded9;
+  border-radius: 10px;
+}
+
+.nav-item-active {
+  border-left: 3px solid #1E5E3A;
+  color: #1A1A17 !important;
+  background: rgba(30, 94, 58, 0.04);
+}
+
+.custom-input:focus {
+  outline: none;
+  border-color: #1E5E3A;
+  box-shadow: 0 0 0 2px rgba(30, 94, 58, 0.1);
+}
